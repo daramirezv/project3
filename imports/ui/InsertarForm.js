@@ -18,43 +18,44 @@ export default class InsertarForm extends Component {
         const precio = document.getElementById("precioViaje").value;
 
         Meteor.call('viajes.insert', origen, destino, ruta, fecha, tiempo, cantidad, precio);
+        this.props.ocultar();
     }
-    
+
     render() {
         return (
-            <div className="formulario">
-                <form>
+            <form>
+                <div className="formulario col-md-6">
                     <div className="form-group">
-                        <label htmlFor="origen">Origen</label>
+                        <label htmlFor="origen"><strong>Origen </strong></label>
                         <input type="text" className="form-control" id="origen" placeholder="Ingrese su origen" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="destino">Destino</label>
+                        <label htmlFor="destino"><strong>Destino</strong></label>
                         <input type="text" className="form-control" id="destino" placeholder="Ingrese su destino" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="routeToTake">Ruta</label>
+                        <label htmlFor="routeToTake"><strong>Ruta</strong></label>
                         <input type="text" className="form-control" id="routeToTake" placeholder="Ingrese su ruta" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="dateLeaving">Fecha de salida</label>
+                        <label htmlFor="dateLeaving"><strong>Fecha de salida</strong></label>
                         <input type="date" className="form-control" id="dateLeaving" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="timeLeaving">Hora de Salida</label>
+                        <label htmlFor="timeLeaving"><strong>Hora de Salida</strong></label>
                         <input type="time" className="form-control" id="timeLeaving" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="cantidadCupos">Cantidad Cupos</label>
+                        <label htmlFor="cantidadCupos"><strong>Cantidad Cupos</strong></label>
                         <input type="number" className="form-control" id="cantidadCupos" placeholder="0" min="0" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="precioViaje">Precio (pesos) </label>
+                        <label htmlFor="precioViaje"><strong>Precio (pesos) </strong></label>
                         <input type="number" className="form-control" id="precioViaje" placeholder="0" min="0" />
                     </div>
                     <button type="button" className="btn btn-primary" onClick={this.registrarViaje}>Registrar</button>
-                </form>
-            </div >
+                </div >
+            </form>
         )
     }
 }
