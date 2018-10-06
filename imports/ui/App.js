@@ -1,3 +1,4 @@
+import { Redirect } from 'react-router'
 import React, { Component } from 'react';
 import { Viajes } from '../api/viajes.js';
 import AccountsUIWrapper from './AccountsUIWrapper.js';
@@ -13,10 +14,31 @@ class App extends Component {
 
         this.state = {
             botonRegistrar: false,
-            verLlenos: true
+            verLlenos: true,
+            redirect: false,
+            idChat: null
         };
+
         this.toggleRegistrar = this.toggleRegistrar.bind(this);
         this.toggleVerLlenos = this.toggleVerLlenos.bind(this);
+        this.setRedirect = this.setRedirect.bind(this);
+        this.renderRedirect = this.renderRedirect.bind(this);
+        this.chatId = this.chatId.bind(this);
+    }
+
+    setRedirect() {
+        this.setState({
+            redirect: !this.state.redirect
+        });
+    }
+
+    renderRedirect() {
+        if (this.state.redirect) {
+            return <Redirect to={{
+                pathname: '/mensajes',
+                state: { idMensajes: this.state.idChat, username: this.props.currentUser.username}
+            }}/>
+        }
     }
 
     toggleRegistrar() {
@@ -28,6 +50,12 @@ class App extends Component {
     toggleVerLlenos() {
         this.setState({
             verLlenos: !this.state.verLlenos
+        });
+    }
+
+    chatId(id){
+        this.setState({
+            idChat: id
         });
     }
 
@@ -43,6 +71,7 @@ class App extends Component {
                 <CardViaje
                     key={viaje._id}
                     viaje={viaje}
+                    establecerChat = {this.chatId}
                     idOwner={this.props.currentUser && this.props.currentUser._id}
                 />
             );
@@ -60,9 +89,9 @@ class App extends Component {
                         </li>
                     </ul>
 
-                    {this.props.currentUser ? 
-                    <a className="nav-link btn btn-primary" href="#">Volver Arriba</a>
-                    : ''}
+                    {this.props.currentUser ?
+                        <a className="nav-link btn btn-primary" href="#">Volver Arriba</a>
+                        : ''}
 
                     {this.props.currentUser ?
                         <label className="hide-completed check">
@@ -79,7 +108,14 @@ class App extends Component {
                     {this.props.currentUser ?
                         <button type="button" className="btn btn-primary registrar btn-lg" onClick={this.toggleRegistrar}>Registrar Viaje</button>
                         : ''}
-                    <br/>
+                    <br />
+                    
+                    {this.props.currentUser && (this.state.idChat != null)? 
+                    <div>
+                        {this.renderRedirect()}
+                        <button type="button" className="btn btn-primary chat btn-lg" onClick={this.setRedirect}>Sala de chat</button>
+                    </div>
+                    : ''}
 
                     {this.state.botonRegistrar ? <InsertarForm ocultar={this.toggleRegistrar} /> : ''}
 

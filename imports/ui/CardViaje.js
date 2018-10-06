@@ -10,6 +10,7 @@ export default class CardViaje extends Component {
 
     reservarCupo() {
         Meteor.call('viajes.reservar', this.props.viaje._id);
+        this.props.establecerChat(this.props.viaje._id);
     }
 
     removerPublicacion() {
