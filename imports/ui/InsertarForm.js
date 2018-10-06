@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 
+//el form para crear un nuevo viaje
 export default class InsertarForm extends Component {
     constructor(props) {
         super(props);

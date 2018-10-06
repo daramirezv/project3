@@ -5,6 +5,7 @@ import { render } from 'react-dom';
 import App from '../ui/App.js'
 import MensajeApp from '../ui/MensajeApp.js'
 
+//Se crean dos rutas, la principal y la de mensajes. En cada uno se renderiza su componente respectivo
 Meteor.startup(() => {
     render(
         <BrowserRouter>

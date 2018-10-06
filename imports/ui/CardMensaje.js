@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+//el card de un mensaje
 export default class CardMensaje extends Component {
 
     render() {

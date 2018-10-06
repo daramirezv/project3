@@ -5,18 +5,21 @@ import { check } from 'meteor/check';
 export const Viajes = new Mongo.Collection('viajes');
 
 if (Meteor.isServer) {
-    // This code only runs on the server
+
+    // Se suscribe a la coleccion de viajes
     Meteor.publish('viajes', function viajesPublication() {
 
         const empresa = Meteor.users.findOne(this.userId).emails[0].address.split("@")[1].split(".")[0]
 
+        //solo se devuelven los viajes que pertenezcan a la empresa del usuario loggineado
         return Viajes.find({
-            email : { $eq : empresa }
+            email: { $eq: empresa }
         });
     });
 }
 
 Meteor.methods({
+    //se inserta un viaje
     'viajes.insert'(origen, destino, ruta, fecha, tiempo, cantidad, precio) {
         check(origen, String);
         check(destino, String);
@@ -24,7 +27,7 @@ Meteor.methods({
         check(cantidad, String);
         check(precio, String);
 
-        // Make sure the user is logged in before inserting a task
+        // El usuario debe estar loggineado
         if (!this.userId) {
             throw new Meteor.Error('not-authorized');
         }
@@ -43,6 +46,8 @@ Meteor.methods({
             email: Meteor.users.findOne(this.userId).emails[0].address.split("@")[1].split(".")[0]
         });
     },
+
+    //se remueve un viaje
     'viajes.remover'(viajeId) {
         check(viajeId, String);
 
@@ -53,11 +58,13 @@ Meteor.methods({
         }
         Viajes.remove(viajeId);
     },
+
+    //se reserva un cupo del viaje
     'viajes.reservar'(viajeId) {
         check(viajeId, String)
 
         const viaje = Viajes.findOne(viajeId);
-        const numero = parseInt(viaje.cantidad,10) - 1 + "";
+        const numero = parseInt(viaje.cantidad, 10) - 1 + "";
         Viajes.update(viajeId, { $set: { cantidad: numero } });
     }
 });
