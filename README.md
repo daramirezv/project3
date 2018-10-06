@@ -23,7 +23,7 @@
 
 - clone the repo on your console, instructions [below](#clone)
 - use `cd project3` to enter the main folder
-- use `npm install` to install npm dependencies
+- use `meteor npm install` to install npm dependencies
 - use `meteor` to run the server locally at port you defined or otherwise it's port 3000 (mongo will run in the next port, 3001 in this case)
 - follow [setup](#setup) guide
 
