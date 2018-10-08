@@ -1,4 +1,6 @@
 /* CSS declarations go here */
+/* You shoulnd't put ALL your styles in 1 big file, try to make css files per component or group of components,
+it is faster and more clear when you want to update the feel and look of your application */
 body {
   background-attachment: fixed;
   background-image: url("/back1.png");
