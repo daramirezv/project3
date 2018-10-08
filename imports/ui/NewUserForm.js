@@ -54,7 +54,7 @@ class NewUserForm extends Component {
   {
     return this.props.companies.map((comp)=>{
       return (       
-        <option key={comp._id} value={comp.name}>{comp.name}</option>
+        <option key={comp._id} value={comp.name}>{comp.name} from {comp.city}</option>
       );
     });
   }
