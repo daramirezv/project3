@@ -9,11 +9,11 @@ if (Meteor.isServer) {
     // Se suscribe a la coleccion de viajes
     Meteor.publish('viajes', function viajesPublication() {
 
-        const empresa = Meteor.users.findOne(this.userId).emails[0].address.split("@")[1].split(".")[0]
+        const empresa = Meteor.users.findOne(this.userId).companie;
 
         //solo se devuelven los viajes que pertenezcan a la empresa del usuario loggineado
         return Viajes.find({
-            email: { $eq: empresa }
+            companie: { $eq: empresa }
         });
     });
 }
@@ -42,8 +42,7 @@ Meteor.methods({
             precio,
             createdAt: new Date(),
             owner: this.userId,
-            username: Meteor.users.findOne(this.userId).username,
-            email: Meteor.users.findOne(this.userId).emails[0].address.split("@")[1].split(".")[0]
+            username: Meteor.users.findOne(this.userId).username
         });
     },
 
