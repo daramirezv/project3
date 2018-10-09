@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 //el card de un mensaje
-export default class CardMensaje extends Component {
+class CardMensaje extends Component {
 
     render() {
         return (
@@ -15,3 +16,10 @@ export default class CardMensaje extends Component {
         )
     }
 }
+
+//Set component propTypes
+CardMensaje.propTypes = {
+    mensaje: PropTypes.object.isRequired
+};
+
+export default CardMensaje;
