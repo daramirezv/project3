@@ -62,7 +62,7 @@ class App extends Component {
 
   //se utiliza para que un card pueda actulizar el state del APP.JS y poner en su state el id de la publicacion
   //y asi saber qué chat abrir con el botón.
-  chatId(id) {
+  setChatId(id) { /*Se le puede poner un mejor nombre al método*/
     this.setState({
       idChat: id
     });
@@ -75,7 +75,9 @@ class App extends Component {
   renderCards() {
     let filteredViajes = this.props.viajes;
 
-    if (this.state.verLlenos) {
+    //Ver llenos significa mostrar los que tienen cupo y los que no (es decir, mostrar todos)
+    if (!this.state.verLlenos) {
+      //Si no se van a ver los llenos, entonces hay que retornar los que tengan cantidad > 0
       filteredViajes = filteredViajes.filter(viaje => viaje.cantidad > 0);
     }
 
@@ -84,7 +86,7 @@ class App extends Component {
         <CardViaje
           key={viaje._id}
           viaje={viaje}
-          establecerChat={this.chatId}
+          establecerChat={this.setChatId /*Nuevo nombre*/}
           idOwner={this.props.currentUser && this.props.currentUser._id}
         />
       );
@@ -115,7 +117,8 @@ class App extends Component {
                                 readOnly
                                 checked={this.state.verLleno}
                                 onClick={this.toggleVerLlenos}
-                            /> <h5 className="llenos"> Ver viajes llenos</h5>
+                            /> {/* Respetar la jerarquía! 'Ver viajes llenos' no es el encabezado de una sección <h5 className="llenos"> Ver viajes llenos</h5>, también no hay ningún h4 definido, no es correcto saltarse de h3 a h5 */}
+                            <span className="llenos"> Ver viajes llenos</span>
                         </label>
                         : ''}
                 </nav>
@@ -126,7 +129,8 @@ class App extends Component {
                         : ''}
                     <br />
                     {/*boton para entrar en la sala de chats*/}
-                    {this.props.currentUser && (this.state.idChat != null) ?
+                    {/* this.props.currentUser && (this.state.idChat !== null) cuidado usando '!=', se debe usar '!==', tamibén, es más sencillo: */
+                        this.props.currentUser && this.state.idChat ?
                         <div>
                             {this.renderRedirect()}
                             <button type="button" className="btn btn-primary chat btn-lg" onClick={this.setRedirect}>Sala de chat</button>
