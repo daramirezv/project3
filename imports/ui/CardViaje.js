@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
+import PropTypes from 'prop-types';
 
 //el card de un viaje
-export default class CardViaje extends Component {
+class CardViaje extends Component {
     constructor(props) {
         super(props);
         this.reservarCupo = this.reservarCupo.bind(this);
@@ -34,10 +35,10 @@ export default class CardViaje extends Component {
                     <li className="list-group-item"><strong>Precio (pesos): </strong>{this.props.viaje.precio}</li>
                 </ul>
                 {/*boton para reservar un cupo*/}
-                {parseInt(this.props.viaje.cantidad, 10) > 0 ?
+                {parseInt(this.props.viaje.cantidad /*más sencillo*/) > 0 ?
                     <div className="card-body">
                         <a href="#" className="btn btn-success" onClick={this.reservarCupo}>Reservar Cupo</a>
-                    </div> : <div className="card-body no_cupos"><h5><strong>No quedan cupos</strong></h5></div>}
+                    </div> : <div className="card-body no_cupos">{/*¡Ojo la jerarquía! (falta un h4)*/}<h5><strong>No quedan cupos</strong></h5></div>}
                 {/*boton para borrar la publicacion*/}
                 {this.props.viaje.owner = this.props.idOwner ?
                     <div className="card-body">
@@ -47,3 +48,10 @@ export default class CardViaje extends Component {
         )
     }
 }
+
+CardViaje.propTypes = {
+    viaje: PropTypes.object,
+    establecerChat: PropTypes.func,
+    idOwner: PropTypes.string
+};
+export default CardViaje;
