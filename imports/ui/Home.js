@@ -24,7 +24,7 @@ class Home extends Component {
 
     if (this.state.redirectNewCompany) {
       return <Redirect to={{
-        pathname: '/newcompanieform'       
+        pathname: '/newcompanyform'       
       }} />;
     } 
     
@@ -111,13 +111,14 @@ class Home extends Component {
               </div>
             </div>
             <div className="row">
+              {/*Ojo con la jerarquía! no saltarse los h3*/}
               <div className="col-md-4">
                 <div className="info">
                   <div className="icon icon-danger">
                     <i className="fa fa-user-plus"/>
                   </div>
                   <div className="description">
-                    <h4 className="info-title">Register companies and users</h4>
+                    <h3 className="info-title">Register companies and users</h3>
                     <p className="description">Sign up now and start enjoying!</p>
                   </div>
                 </div>
@@ -128,7 +129,7 @@ class Home extends Component {
                     <i className="fas fa-car"></i>
                   </div>
                   <div className="description">
-                    <h4 className="info-title">Share journeys</h4>
+                    <h3 className="info-title">Share journeys</h3>
                     <p className="description">Create carpooling entry and wait for your co-workers to join.</p>
                   </div>
                 </div>
@@ -139,7 +140,7 @@ class Home extends Component {
                     <i className="fas fa-hand-pointer"></i>
                   </div>
                   <div className="description">
-                    <h4 className="info-title">Join journeys</h4>
+                    <h3 className="info-title">Join journeys</h3>
                     <p> Join other`s journey with a single click! </p>
                   </div>
                 </div>

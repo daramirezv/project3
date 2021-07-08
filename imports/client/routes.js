@@ -8,7 +8,7 @@ import Home from '../ui/Home.js';
 import MensajeApp from '../ui/MensajeApp.js';
 import NewUserForm from '../ui/NewUserForm.js';
 import SignIn from '../ui/SignIn.js';
-import NewCompanieForm from '../ui/NewCompanieForm.js';
+import NewCompanyForm from '../ui/NewCompanieForm.js';
 
 //Se crean dos rutas, la principal y la de mensajes. En cada uno se renderiza su componente respectivo
 Meteor.startup(() => {
@@ -19,7 +19,7 @@ Meteor.startup(() => {
         <Route path='/app' component={App} />        
         <Route path='/newuserform' component={NewUserForm} />        
         <Route path='/signin' component={SignIn} />
-        <Route path='/newcompanieform' component={NewCompanieForm} />  
+        <Route path='/newcompanyform' component={NewCompanyForm} />  
         <Route path='/' component={Home} />        
       </Switch>
     </BrowserRouter>,

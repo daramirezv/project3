@@ -86,6 +86,12 @@ class MensajeApp extends Component {
           {this.renderRedirect()}
           <button className="btn btn-primary inicio btn-lg" onClick={this.setRedirect}>Devolverse</button>
         </div>
+     
+        {/*mensajes reenderizados*/}
+        <ul>
+          {this.renderMensajes()}
+        </ul>
+
         {/*el espacio para ingresar un nuevo mensaje*/}
         <form className="new-mensaje container" onSubmit={this.handleSubmit} >
           <input
@@ -94,11 +100,9 @@ class MensajeApp extends Component {
             ref="textInput"
             placeholder="Ingresa nuevos mensajes"
           />
+          {/*No todos van a saber que presionando 'enter' van a poder mandar le mensaje. Deben dejarlo explícito y poner también un botón (a los de celular les puede quedar más fácil)*/}
+          <button type="submit" class="send-message-button">Enviar {/*Puede ponerse también un icono como en whatsapp/messenger*/}</button>
         </form>
-        {/*mensajes reenderizados*/}
-        <ul>
-          {this.renderMensajes()}
-        </ul>
 
       </div>
     );

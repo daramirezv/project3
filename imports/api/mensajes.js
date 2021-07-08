@@ -19,8 +19,8 @@ Meteor.methods({
     check(idChat, String);
 
     //el usuario tiene que estar loggineado
-    if (!this.userId) {
-      throw new Meteor.Error('not-authorized');
+    if (/*!this.userId ¿esta variable de donde sale?*/ !Meteor.user()) {
+      /*si lo hace con throw, el error se lanza en el server*/return new Meteor.Error('not-authorized');
     }
     Mensajes.insert({
       mensaje,

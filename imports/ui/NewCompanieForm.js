@@ -42,7 +42,7 @@ export default class NewCompanieForm extends Component {
 
   renderError( )
   {
-    if(this.state.error !== '')
+    if(this.state.error /*así es suficiente*/)
     {
       return(
         <div className="alert">      

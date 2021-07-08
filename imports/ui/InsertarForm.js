@@ -10,6 +10,7 @@ export default class InsertarForm extends Component {
 
     registrarViaje() {
 
+        //¡Se pueden usar refs para evitar esto y queda mucho más simple! 
         const origen = document.getElementById("origen").value;
         const destino = document.getElementById("destino").value;
         const ruta = document.getElementById("routeToTake").value;
@@ -17,9 +18,13 @@ export default class InsertarForm extends Component {
         const tiempo = document.getElementById("timeLeaving").value;
         const cantidad = document.getElementById("cantidadCupos").value;
         const precio = document.getElementById("precioViaje").value;
-
-        Meteor.call('viajes.insert', origen, destino, ruta, fecha, tiempo, cantidad, precio);
-        this.props.ocultar();
+        
+        //No creo que sea buena idea pasarle DOM elements a el servidor (en Node puede ser peligroso manipularlos, porque no hay interfaz gráfica)
+        Meteor.call('viajes.insert', origen, destino, ruta, fecha, tiempo, cantidad, precio, (err) =>{
+            if(err) return alert(err);
+            //Si hay un error, y no se va a ocultar
+            this.props.ocultar(); 
+        });
     }
 
     render() {

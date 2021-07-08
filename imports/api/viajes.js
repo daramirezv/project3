@@ -28,7 +28,7 @@ Meteor.methods({
         check(precio, String);
 
         // El usuario debe estar loggineado
-        if (!this.userId) {
+        if (!Meteor.user()/*this.userId usar Meteor.user()*/ ) {
             throw new Meteor.Error('not-authorized');
         }
 
@@ -41,8 +41,8 @@ Meteor.methods({
             cantidad,
             precio,
             createdAt: new Date(),
-            owner: this.userId,
-            username: Meteor.users.findOne(this.userId).username
+            owner: Meteor.user()._id,
+            username: Meteor.users.findOne(Meteor.user()._id).username
         });
     },
 
@@ -51,7 +51,7 @@ Meteor.methods({
         check(viajeId, String);
 
         const viaje = Viajes.findOne(viajeId);
-        if (viaje.owner !== this.userId) {
+        if (viaje.owner !== Meteor.user()._id) {
             // If the task is private, make sure only the owner can delete it
             throw new Meteor.Error('not-authorized');
         }
